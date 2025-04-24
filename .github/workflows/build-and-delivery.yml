@@ -1,9 +1,11 @@
 name: Build and Delivery
+
 on:
   workflow_run:
     workflows: ["Test Python App"]
     branches: [main]
     types: [completed]
+
 jobs:
   cd:
     runs-on: ubuntu-latest
@@ -14,6 +16,7 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build and Push
         uses: docker/build-push-action@v6
         with:
